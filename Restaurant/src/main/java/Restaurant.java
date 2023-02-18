@@ -7,7 +7,7 @@ public class Restaurant {
     private String location;
     public LocalTime openingTime;
     public LocalTime closingTime;
-    private List<Item> menu = new ArrayList<Item>();
+    private List<Item> menu = new ArrayList<>();
 
     public Restaurant(String name, String location, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
@@ -63,6 +63,17 @@ public class Restaurant {
 
     public String getName() {
         return name;
+    }
+
+    public int calculateOrderValueByMenuItem(List<String> selectedMenuItemNames) {
+        int totalOrderCost = 0;
+        for (String selectedMenuItemName : selectedMenuItemNames) {
+            Item itemByName = this.findItemByName(selectedMenuItemName);
+            if (itemByName != null) {
+                totalOrderCost += itemByName.getPrice();
+            }
+        }
+        return totalOrderCost;
     }
 
 }
